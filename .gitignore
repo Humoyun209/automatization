@@ -5,3 +5,4 @@ __pycache__
 caches/*
 !caches/*.txt
 app/chromedriver
+app/generator_users.py

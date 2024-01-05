@@ -1,7 +1,7 @@
 import pickle
 import time
 from fake_useragent import UserAgent
-from selenium import webdriver
+from selenium import  webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -20,7 +20,8 @@ class BaseClub:
         options.add_argument("--disable-dev-shm-usage")
         options.add_experimental_option("useAutomationExtension", False)
         self.driver = webdriver.Chrome(
-            options=options, service=Service("app/chromedriver")
+            options=options,
+            service=Service('app/chromedriver.exe')
         )
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()

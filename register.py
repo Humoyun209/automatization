@@ -1,6 +1,7 @@
 from app.get_data import read_users
 from register_base.main import ZnMail
 from multiprocessing import Pool
+from app.generator_users import generate_email
 
 
 def func(user):

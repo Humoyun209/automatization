@@ -38,7 +38,6 @@ class ZnMail(BaseClub):
 
             buy_btn = self.driver.find_element(By.XPATH, BUY_BUTTON)
             self.delete_cloudfare()
-
             self.driver.execute_script(
                 "return arguments[0].scrollIntoView(true)", buy_btn
             )
@@ -47,8 +46,8 @@ class ZnMail(BaseClub):
                 EC.element_to_be_clickable((By.XPATH, BUY_BUTTON))
             )
             buy_btn.click()
-
-            time.sleep(self.sleep_time)
+            time.sleep(5)
+            # time.sleep(self.sleep_time)
         except Exception as e:
             print(type(e))
 
@@ -78,5 +77,10 @@ class ZnMail(BaseClub):
             with open("users.txt", "a") as f:
                 f.write(f"{email}:{password}\n")
             time.sleep(0.5)
+            self.driver.get("https://dublikat.club/")
+            self.delete_cloudfare()
+            time.sleep(0.5)
+            with open(f'caches/{email.split("@")[0]}', 'wb'):
+                pickle.dump(self.driver.get_cookies(), f)
         except Exception as e:
             print(type(e))
