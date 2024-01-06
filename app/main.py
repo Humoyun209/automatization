@@ -21,7 +21,7 @@ class BaseClub:
         options.add_experimental_option("useAutomationExtension", False)
         self.driver = webdriver.Chrome(
             options=options,
-            service=Service('app/chromedriver.exe')
+            service=Service('app/chromedriver')
         )
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()

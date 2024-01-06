@@ -80,7 +80,8 @@ class ZnMail(BaseClub):
             self.driver.get("https://dublikat.club/")
             self.delete_cloudfare()
             time.sleep(0.5)
-            with open(f'caches/{email.split("@")[0]}', 'wb'):
+            username = email.split("@")[0]
+            with open(f"caches/{username}", "wb") as f:
                 pickle.dump(self.driver.get_cookies(), f)
         except Exception as e:
             print(type(e))

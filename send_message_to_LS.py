@@ -4,17 +4,18 @@ from send_message.main import SendMessage
 from app.get_data import read_users
 
 
-def func(user):
+def func(users):
     sm = SendMessage()
-    sm.to_chat(
-        user.get('username'),
-        poluchateli=['ProgreSS'],
+    sm.do_work(
+        users,
+        poluchateli=["ProgreSS"],
         title="Let's gooo",
-        description="Let's go Sean"
+        description="Let's go Sean",
+        message="Работаю...",
     )
-    sm.auto_answer("Работаю...")
 
 
 if __name__ == '__main__':
-    p = Pool(1)
-    p.map(func, read_users('users.txt'))
+    kolichestvo_potokov = 1
+    p = Pool(kolichestvo_potokov)
+    p.map(func, [read_users('users.txt') for _ in range(kolichestvo_potokov)])
