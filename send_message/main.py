@@ -1,8 +1,6 @@
 import random
 import time
 
-from urllib3.exceptions import MaxRetryError
-
 from app.main import BaseClub
 from send_message.variables import *
 from selenium.webdriver.common.by import By
