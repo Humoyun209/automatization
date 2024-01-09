@@ -16,3 +16,17 @@ def generate_email(domain: str = "gmail.com"):
         })
 
     return users
+
+
+def split_users(users: list[dict], spliter: int):
+    length = len(users)
+    split_n = length // spliter if length % spliter == 0 else (length // spliter) + 1
+    data_users = []
+    i = 0
+    while split_n > 0:
+        data_users.append(
+            users[i:i+spliter]
+        )
+        i = i+spliter
+        split_n -= 1
+    return data_users

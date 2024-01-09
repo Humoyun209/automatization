@@ -1,5 +1,6 @@
 from multiprocessing import Pool
 
+from app.generator_users import split_users
 from send_message.main import SendMessage
 from app.get_data import read_users
 
@@ -16,6 +17,10 @@ def func(users):
 
 
 if __name__ == '__main__':
-    kolichestvo_potokov = 1
+    group_users = split_users(
+        read_users('users.txt'),
+        spliter=2
+    )
+    kolichestvo_potokov = len(group_users)
     p = Pool(kolichestvo_potokov)
-    p.map(func, [read_users('users.txt') for _ in range(kolichestvo_potokov)])
+    p.map(func, group_users)

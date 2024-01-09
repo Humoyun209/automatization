@@ -1,7 +1,11 @@
-import pickle
+import os
 import time
+import pickle
+import traceback
+
 from fake_useragent import UserAgent
 from selenium import  webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -39,6 +43,14 @@ class BaseClub:
             },
         )
 
+    def delete_user(self, path):
+        try:
+            if os.path.exists(path):
+                os.remove(path)
+            self.driver.quit()
+        except Exception as e:
+            print(type(e))
+
     def login_dublicat(self, username, password):
         try:
             self.driver.get(LOGIN_URL)
@@ -50,9 +62,13 @@ class BaseClub:
             )
             self.driver.find_element(By.XPATH, LOGIN_BTN).click()
             time.sleep(1)
-            with open(f"caches/{username}", "wb") as f:
-                pickle.dump(self.driver.get_cookies(), f)
-            time.sleep(10)
+            try:
+                self.driver.find_element(By.XPATH, P_BODY)
+                with open(f"caches/{username}", "wb") as f:
+                    pickle.dump(self.driver.get_cookies(), f)
+                time.sleep(1)
+            except NoSuchElementException:
+                self.delete_user(f"caches/{username}")
         except Exception as e:
             print(type(e))
         finally:

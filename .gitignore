@@ -6,3 +6,4 @@ caches/*
 !caches/*.txt
 app/chromedriver
 Копия users.txt
+users_parser/*txt
